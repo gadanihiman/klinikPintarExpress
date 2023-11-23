@@ -1,5 +1,6 @@
 import express from 'express'
 // TODO change database?
+// It's ok for simple project
 import { Database } from "sqlite3"
 
 const app = express();
