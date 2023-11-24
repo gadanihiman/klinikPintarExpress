@@ -1,42 +1,35 @@
-import express from 'express'
+import express from 'express';
+// import router from './routes/index.routes';
+import { API_PREFIX } from './constants/paths';
+import connectToDatabase from './utils/databaseConnection';
+import createRouter from './routes/index.routes';
 // TODO change database?
 // It's ok for simple project
-import { Database } from "sqlite3"
 
 const app = express();
-const db = new Database('database.db')
+const PORT = 9000;
 
-app.use(express.json())
-app.use(express.static('public'))
+async function startServer() {
+  try {
+    const db = await connectToDatabase();
 
-// TODO how do you debug typescript code?
-app.listen(9000, () => {
-    console.log('App is running')
-})
+    app.use(express.json());
+    app.use(express.static('public'));
 
-// TODO split to separate module
-// TODO what's the bug in this method and how to fix it?
-app.get('/init', (req, res) => {
-    // TODO normalize database
-    db.run(`CREATE TABLE disease(
-        name            text
-        picture         text
-        patient_name    text
-        patient_age     int
-    )`)
+    const initRouter = createRouter(db);
+    app.use(API_PREFIX, initRouter);
 
-    db.all(`SELECT * FROM disease`, (err: any, data: any) => {
-        res.send(data)
-    })
-    // TODO sample database join?
-})
+    // TODO how do you debug typescript code?
+    app.listen(PORT, () => {
+      console.log(`App is running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error('Failed to start the server:', error);
+  }
+}
 
-// TODO create CRUD sample
-app.get('/diseases', (req, res) => {
-    db.all(`SELECT * FROM disease`, (err: any, data: any) => {
-        res.send(data)
-    })
-})
+startServer();
+
 // TODO create dockerfile
 // TODO create docker-compose file
 // TODO set CI/CD for the repository
