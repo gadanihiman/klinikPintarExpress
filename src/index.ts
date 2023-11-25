@@ -21,5 +21,3 @@ async function startServer() {
 }
 
 startServer();
-
-// TODO set CI/CD for the repository
