@@ -1,19 +1,17 @@
-import { Router, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import responseGenerator from '../utils/responseGenerator';
 import { diseaseService } from '../services/disease.service';
 
-const router = Router();
-
-router.get('/', async (req: Request, res: Response) => {
+export async function getAllDiseases(req: Request, res: Response) {
   try {
     const data = await diseaseService.getAllDiseases();
     responseGenerator(res, 200, { data });
   } catch (error) {
     responseGenerator(res, 500, { error });
   }
-});
+}
 
-router.post('/', async (req: Request, res: Response) => {
+export async function createDisease(req: Request, res: Response) {
   const { name, picture, patientId } = req.body;
   try {
     const createdId = await diseaseService.createDisease(name, picture, patientId);
@@ -21,9 +19,9 @@ router.post('/', async (req: Request, res: Response) => {
   } catch (error) {
     responseGenerator(res, 500, { error });
   }
-});
+}
 
-router.put('/:id', async (req: Request, res: Response) => {
+export async function updateDisease(req: Request, res: Response) {
   const { id } = req.params;
   const { name, picture } = req.body;
   try {
@@ -32,9 +30,9 @@ router.put('/:id', async (req: Request, res: Response) => {
   } catch (error) {
     responseGenerator(res, 500, { error });
   }
-});
+}
 
-router.delete('/:id', async (req: Request, res: Response) => {
+export async function deleteDisease(req: Request, res: Response) {
   const { id } = req.params;
   try {
     const affectedRows = await diseaseService.deleteDisease(Number(id));
@@ -42,6 +40,4 @@ router.delete('/:id', async (req: Request, res: Response) => {
   } catch (error) {
     responseGenerator(res, 500, { error });
   }
-});
-
-export default router;
+}
