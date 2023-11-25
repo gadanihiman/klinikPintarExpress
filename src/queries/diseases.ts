@@ -1,6 +1,6 @@
 import { TABLE_NAME as PATIENT_TABLE_NAME } from './patients';
 
-export const TABLE_NAME = 'disease';
+export const TABLE_NAME = 'diseases';
 
 export const CREATE_DISEASE = `
   INSERT INTO ${TABLE_NAME} (name, picture, patient_id) VALUES (?, ?, ?)
