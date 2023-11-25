@@ -22,7 +22,5 @@ async function startServer() {
 
 startServer();
 
-// TODO create dockerfile
-// TODO create docker-compose file
 // TODO set CI/CD for the repository
 // TODO create unit test
