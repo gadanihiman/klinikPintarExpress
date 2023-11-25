@@ -28,10 +28,10 @@ const diseaseService = {
     }
   },
 
-  async updateDisease(id: number, name: string, picture: string) {
+  async updateDisease(id: number, name: string, picture: string, patientId: number) {
     const connection = await pool.getConnection();
     try {
-      const [result] = await connection.query(UPDATE_DISEASE, [name, picture, id]);
+      const [result] = await connection.query(UPDATE_DISEASE, [name, picture, patientId, id]);
       return (result as ResultSetHeader).affectedRows;
     } finally {
       connection.release();

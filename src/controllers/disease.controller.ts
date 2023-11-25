@@ -23,9 +23,9 @@ export async function createDisease(req: Request, res: Response) {
 
 export async function updateDisease(req: Request, res: Response) {
   const { id } = req.params;
-  const { name, picture } = req.body;
+  const { name, picture, patientId } = req.body;
   try {
-    const affectedRows = await diseaseService.updateDisease(Number(id), name, picture);
+    const affectedRows = await diseaseService.updateDisease(Number(id), name, picture, patientId);
     responseGenerator(res, 200, { message: 'Record updated successfully', meta: { changes: affectedRows } });
   } catch (error) {
     responseGenerator(res, 500, { error });

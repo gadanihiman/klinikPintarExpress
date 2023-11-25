@@ -140,9 +140,7 @@ This command will rebuild the image for the `app` service and restart the contai
 - The MySQL service is configured to store data in a Docker volume named `mysql-data`. This means your database data will persist across container restarts.
 - Ensure that any necessary environment variables are set, either in the `docker-compose.yml` file or in an `.env` file.
 
----
-
-This documentation provides a basic overview of how to use Docker Compose to manage the application's environment. You can expand this section with more details specific to your project's setup or additional Docker Compose commands as needed.
+----
 
 ## Author
 

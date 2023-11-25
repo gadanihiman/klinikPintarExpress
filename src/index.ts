@@ -23,4 +23,3 @@ async function startServer() {
 startServer();
 
 // TODO set CI/CD for the repository
-// TODO create unit test
