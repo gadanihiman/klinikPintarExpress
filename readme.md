@@ -1,25 +1,22 @@
-
----
-
-# Simple Express TypeScript Project - (klinik pintar example api)
+# Klinik Pintar Example App Using Express TypeScript and Vue.js SPA
 
 ## Description
 
-This is a simple Express server implemented in TypeScript. It provides a robust setup for building a web server with Node.js, Express, and MySQL, including a development environment with live reloading and database management scripts.
+This project is a full-stack web application featuring a Vue.js frontend and an Express TypeScript backend. It serves as an example API for a clinic management system, handling operations like managing diseases and patient information. The frontend is built with Vue.js, offering a dynamic user experience, while the backend is implemented in Express with TypeScript for robust server-side functionality.
 
 ## Prerequisites
 
-Before running this project, make sure you have the following installed:
+Before running this project, ensure you have the following installed:
 - Node.js
 - npm or Yarn
-- Docker (if you're using Docker for MySQL and phpMyAdmin)
+- Docker (optional, for running MySQL and phpMyAdmin in containers)
 
 ## Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://your-repository-url.git
-   cd express-typescript
+   git clone https://github.com/gadanihiman/klinikPintarExpress
+   cd klinikPintarExpress
    ```
 
 2. Install dependencies:
@@ -30,12 +27,43 @@ Before running this project, make sure you have the following installed:
    ```
 
 3. Set up your environment variables:
-   Create a `.env` file in the root of your project and configure your environment variables, such as database connection settings.
-   You can copy from `.env.example` file.
+   Create a `.env` file in the root of your project based on the `.env.example` file.
 
 ## Running the Project
 
-### Development
+### Docker Compose
+
+I Suggest to Start the project with Docker Compose for easy setup and running the project with MySQL and phpMyAdmin in containers. (make sure you have docker installed):
+
+  ```bash
+  docker-compose up -d
+  ```
+Before Everything, you need to run the migration and seed the database with sample data using the provided scripts:
+  ```bash
+  npm run migrate
+  npm run seed
+  # or
+  yarn migrate
+  yarn seed
+  ```
+
+
+#### Then you can access the project with the following steps:
+
+### Database (MySQL)
+Open `http://localhost:8080` in your browser to view phpMyAdmin to view your MYSQL Database.
+  - if you don't need phpMyAdmin, you can remove the phpmyadmin service from docker-compose.yml
+  - you are free to change the port of phpMyAdmin in docker-compose.yml
+
+### Frontend (Vue.js)
+Open `http://localhost:9000` in your browser to view the frontend.
+
+### Backend (Express TypeScript)
+Open `http://localhost:9000/api` using Postman for using the backend API.
+
+-----
+
+## Development
 
 - Start the development server with live reloading:
   ```bash
@@ -44,7 +72,7 @@ Before running this project, make sure you have the following installed:
   yarn dev
   ```
 
-### Production
+## Production
 
 - Build the project:
   ```bash
@@ -60,87 +88,34 @@ Before running this project, make sure you have the following installed:
   yarn start
   ```
 
+- notes:
+  - suggestion for production server is using docker-compose up -d
+
 ## Database Operations
 
-### Migrations
+### Migrations and Seeding
 
-Run database migrations:
+- Run migrations and seed the database with sample data using the provided scripts:
   ```bash
   npm run migrate
-  # or
-  yarn migrate
-  ```
-
-### Seeding
-
-Seed the database with sample data:
-  ```bash
   npm run seed
   # or
+  yarn migrate
   yarn seed
   ```
 
 ## Formatting Code
 
-To format the codebase using Prettier:
+- Format the codebase using Prettier:
   ```bash
   npm run format
   # or
   yarn format
   ```
 
-----
+## Running with Docker Compose (recommended)
 
-## Running with Docker Compose
-
-The project includes a `docker-compose.yml` file, which simplifies the process of setting up and running the application along with its dependencies, such as MySQL and phpMyAdmin.
-
-### Prerequisites
-
-- Docker
-- Docker Compose
-
-### Steps to Run
-
-1. **Starting the Services:**
-
-   To start all services defined in the `docker-compose.yml` file (app, MySQL database, and phpMyAdmin), run the following command in the root directory of the project:
-
-   ```bash
-   docker-compose up -d
-   ```
-
-   The `-d` flag runs the containers in detached mode, meaning they will run in the background.
-
-2. **Accessing the Application:**
-
-   - The application will be available at `http://localhost:9000`.
-   - phpMyAdmin will be accessible at `http://localhost:8080`.
-
-3. **Stopping the Services:**
-
-   To stop and remove the containers, networks, and volumes created by Docker Compose, run:
-
-   ```bash
-   docker-compose down
-   ```
-
-### Rebuilding the Application
-
-If you make changes to the application's Dockerfile or its dependencies, you'll need to rebuild the Docker image. To do this, run:
-
-```bash
-docker-compose up -d --build
-```
-
-This command will rebuild the image for the `app` service and restart the containers.
-
-### Notes
-
-- The MySQL service is configured to store data in a Docker volume named `mysql-data`. This means your database data will persist across container restarts.
-- Ensure that any necessary environment variables are set, either in the `docker-compose.yml` file or in an `.env` file.
-
-----
+- Follow the instructions in the existing `README.md` section for Docker Compose.
 
 ## Author
 
@@ -149,4 +124,3 @@ Gadani Himan Gurusinga - gadanihiman@gmail.com
 ## License
 
 This project is licensed under the ISC License.
-

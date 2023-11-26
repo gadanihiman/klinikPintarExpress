@@ -1,7 +1,8 @@
 import express from 'express';
+import 'dotenv/config';
+
 import { API_PREFIX } from './constants/paths';
 import router from './routes/index.routes';
-import 'dotenv/config';
 
 const app = express();
 const PORT = process.env.PORT || 9000;

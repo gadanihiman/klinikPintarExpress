@@ -22,8 +22,8 @@ export const GET_DISEASE_JOIN_PATIENT = `
     d.id,
     d.name,
     d.picture,
-    p.name AS patient_name,
-    p.age AS patient_age
+    p.name AS patientName,
+    p.age AS patientAge
   FROM ${TABLE_NAME} AS d
   INNER JOIN ${PATIENT_TABLE_NAME} AS p ON p.id = d.patient_id
 `;
